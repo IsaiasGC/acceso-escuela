@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 // import md5 from 'md5';
 import logo from '../logo.svg';
 // import withReactContent from 'sweetalert2-react-content';
@@ -13,6 +14,7 @@ class Login extends Component {
     error: false
   }
   handleLogin=(e)=>{
+    return this.props.history.push('/alumnos');
   }
   render() {
     return (
@@ -21,28 +23,34 @@ class Login extends Component {
           <Col>
           </Col>
         </Row>
-        <Row>
-          <Col>
-            <Card className="text-center mt-5">
-              <Card.Header>
-                <h1 className="text-center"><img alt="LogoItc" src={logo} width="30" className="d-inline-block align-top" />{' Gimnasio'}</h1>
+        <Row className="justify-content-lg-center">
+          <Col className="mt-5" lg="5">
+            <Card className="mt-5 card-login" style={{ width: '100%' }} border="dark">
+              <Card.Header style={{ backgroundColor: '#343a40', color: 'white' }}>
+                <h1 className="text-center"><img alt="LogoItc" src={logo} width="70" className="d-inline-block align-top" />{'TACS'}</h1>
               </Card.Header>
               <Card.Body>
-                <form onSubmit={this.handleLogin}>
-                  <div className="card-body">
-                    <input id="email" name="email" type="email" className="form-control" placeholder="usuario@itcelaya.edu.mx" required="required"/>
-                  </div>
-                  <div className="card-body">
-                    <input id="pass" name="pass" type="password" className="form-control" placeholder="contraseña" required="required"/>
-                  </div>
-                  <div className="card-body">
-                  <Button type="submit" className="btn btn-success btn-block">
+                <Form onSubmit={this.handleLogin}>
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Label><i class="fas fa-user"></i> Email:</Form.Label>
+                    <Form.Control type="email" name="email" placeholder="Ingresa tu correo" required/>
+                    <Form.Text className="text-muted">
+                      We'll never share your email with anyone else.
+                    </Form.Text>
+                  </Form.Group>
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Label><i class="fas fa-key"></i> Password:</Form.Label>
+                    <Form.Control type="password" name="password" placeholder="Contraseña" required/>
+                  </Form.Group>
+                  <Form.Group controlId="formBasicCheckbox">
+                    <Form.Check type="checkbox" label="Recordarme" />
+                  </Form.Group>
+                  <Button type="submit" className="btn btn-primary btn-block">
                     Ingresar <i class="fas fa-sign-in-alt 2x"></i>
                   </Button>
-                  </div>
-                </form>
+                </Form>
               </Card.Body>
-              <Card.Footer className="text-muted">2 days ago</Card.Footer>
+              {/* <Card.Footer className="text-muted"></Card.Footer> */}
             </Card>
           </Col>
         </Row>
@@ -51,4 +59,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

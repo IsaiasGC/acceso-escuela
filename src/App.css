@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.card-login {
+  box-shadow: 0px 10px 10px #cccccc;
+  border-radius: 5px;
+}
