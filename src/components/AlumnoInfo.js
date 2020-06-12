@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { img } from 'react-bootstrap';
 
 class AlumnoInfo extends Component{
     render() {
