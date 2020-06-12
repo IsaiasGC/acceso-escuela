@@ -91,21 +91,21 @@ class Login extends Component {
               <Card.Body>
                 <Form onSubmit={this.handleLogin}>
                   <Form.Group controlId="formBasicEmail">
-                    <Form.Label><i class="fas fa-user"></i> Email:</Form.Label>
+                    <Form.Label><i className="fas fa-user"></i> Email:</Form.Label>
                     <Form.Control type="email" ref={this.email} placeholder="Ingresa tu correo" required/>
                     <Form.Text className="text-muted">
                       We'll never share your email with anyone else.
                     </Form.Text>
                   </Form.Group>
                   <Form.Group controlId="formBasicPassword">
-                    <Form.Label><i class="fas fa-key"></i> Password:</Form.Label>
+                    <Form.Label><i className="fas fa-key"></i> Password:</Form.Label>
                     <Form.Control type="password" ref={this.password} placeholder="Contraseña" required/>
                   </Form.Group>
                   <Form.Group controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Recordarme" />
                   </Form.Group>
                   <Button type="submit" className="btn btn-primary btn-block">
-                    Ingresar <i class="fas fa-sign-in-alt 2x"></i>
+                    Ingresar <i className="fas fa-sign-in-alt 2x"></i>
                   </Button>
                 </Form>
               </Card.Body>
