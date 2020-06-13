@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom';
 import logo from '../logo.svg';
 
 class Navegacion extends Component {
-    logout=()=>{
+    handleLogout=()=>{
+        this.props.logout();
         return this.props.history.push('/login');
     }
     navigate=(link)=>{
@@ -27,7 +28,7 @@ class Navegacion extends Component {
                         <Link to="/crud" replace="true" className="nav-link"><i className="fas fa-database 2x"></i> CRUD</Link>
                         </NavDropdown.Item> */}
                         <NavDropdown.Divider />
-                        <NavDropdown.Item onClick={this.logout} style={{color: 'red'}}>
+                        <NavDropdown.Item onClick={this.handleLogout} style={{color: 'red'}}>
                         Cerrar Sesion <i className="fas fa-sign-out-alt 2x"></i>
                         </NavDropdown.Item>
                     </NavDropdown>

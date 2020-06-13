@@ -8,7 +8,6 @@ import withReactContent from 'sweetalert2-react-content';
 
 
 const MySwal = withReactContent(Swal);
-
 class Login extends Component {
   state={
 	name: '',
@@ -18,7 +17,7 @@ class Login extends Component {
   email=React.createRef();
   password=React.createRef();
 
-  handleLogin=(e)=>{
+handleLogin=(e)=>{
 	e.preventDefault();
 	const pass=this.password.current.value;
 	const mail=this.email.current.value;
@@ -61,6 +60,7 @@ class Login extends Component {
 	//     }
 	//   });
 	if(mail==='15030094@itcelaya.edu.mx' && pass==='el isa'){
+		this.props.login();
 		return this.props.history.push('/alumnos');
 	}else {
 		this.password.current.value="";
