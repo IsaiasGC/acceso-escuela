@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+.card-login {
+  box-shadow: 0px 10px 10px #cccccc;
+  border-radius: 5px;
+}
+.nav-link{
+  text-decoration: none;
+  color: rgb(173, 173, 173);
+}
+.nav-link:hover{
+  text-decoration: none;
+  color: hsla(0,0%,100%,.75);
+}
