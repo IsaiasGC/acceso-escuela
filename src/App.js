@@ -8,16 +8,16 @@ import Navegacion from './components/Navegacion';
 
 function App() {
   return (
-    <React.Fragment>
-      <BrowserRouter>
-        <Switch>
-          <Route path='/login' exact component={Login}/>
-          <Navegacion/>
-          <Route path='/' exact component={Login}/>
-          <Route path='/alumnos' exact component={Login}/>
-        </Switch>
-      </BrowserRouter>
-    </React.Fragment>
+	<React.Fragment>
+	  <BrowserRouter>
+		<Switch>
+			<Route path='/login' exact component={Login}/>
+			<Navegacion/>
+			<Route path='/' exact component={Login}/>
+			<Route path='/alumnos' exact component={Login}/>
+		</Switch>
+	  </BrowserRouter>
+	</React.Fragment>
   );
 }
 
