@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 class Alumnos extends Component{
   state={
     datos: []
+    //aqui van los datos
   }
   componentDidMount(){
     fetch('URL')
