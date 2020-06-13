@@ -49,3 +49,7 @@
   text-decoration: none;
   color: hsla(0,0%,100%,.75);
 }
+.section-btn{
+  padding: 20px;
+  text-align: center;
+}

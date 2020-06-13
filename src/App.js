@@ -7,7 +7,7 @@ import Login from './components/Login';
 import Navegacion from './components/Navegacion';
 import Alumnos from './components/Alumnos';
 import NotFound from './components/NotFound';
-// import AlumnoInfo from './components/AlumnoInfo';
+import AlumnoInfo from './components/AlumnoInfo';
 
 class App extends Component {
 	constructor(props) {
@@ -31,14 +31,13 @@ class App extends Component {
 		return (
 			<React.Fragment>
 			<BrowserRouter>
+				{ this.state.isLoggedIn && <Navegacion logout={this.logout}/> }
 				<Switch>
-					{ this.state.isLoggedIn ? <Redirect from='/login' to='/'/> : <Redirect from='/' to='/login' exact/> }
+					{ this.state.isLoggedIn ? <Redirect from='/login' to='/alumnos'/> : <Redirect from='/' to='/login' exact/> }
 					{ !this.state.isLoggedIn && <Redirect from='/alumnos' to='/login'/> }
 					<Route path='/login' exact render={()=><Login login={this.login}/>}/>
-					{ this.state.isLoggedIn && <Navegacion logout={this.logout}/> }
-					<Route path='/' exact component={Login}/>
-					<Route path='/alumnos' exact component={Alumnos}/>
-					{/* <Route path='/alumnos/info' exact component={AlumnoInfo}/> */}
+					<Route path='/alumnos' exact render={()=><Alumnos/>}/>
+					<Route path='/alumnos/info' exact render={()=><AlumnoInfo/>}/>
 					<Route path="*" component={NotFound}/>
 				</Switch>
 			</BrowserRouter>

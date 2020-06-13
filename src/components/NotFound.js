@@ -24,7 +24,7 @@ class NotFound extends Component{
                         <div className="error__title">404</div>
                         <div className="error__subtitle">Hmmm...</div>
                         <div className="error__description">Parece que uno de los desarrolladores se quedó dormido.</div>
-                        <button className="error__button error__button--active"  value="LOGIN" onClick={this.toLogin}>LOGIN</button>
+                        <button className="error__button error__button--active"  value="HOME" onClick={this.toLogin}>LOGIN</button>
                         {/* <button className="error__button">CONTACT</button> */}
                     </div>
 

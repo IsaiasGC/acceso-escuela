@@ -8,7 +8,9 @@ class AlumnoInfo extends Component{
         return this.props.history.push('/alumnos');
     }
     render() {
-        const alumnos=this.props.location.state.alumnos;
+        console.log(this.props.location);
+        
+        const alumnos=this.props.location.state.alumno;
         return (
             <div className="container">
             <div className="p-3 mb-2 bg-light text-dark" > 
@@ -17,13 +19,13 @@ class AlumnoInfo extends Component{
                 </div>
                 <div className="panel-body">
                     <div>
-                        <button type="button" className="btn btn-success">
+                        <button type="button" className="btn btn-success" onClick={this.regresar}>
                         Regresar
                         </button>
                     </div>
                    <div className="row">
                         <div className="col-md-4">
-                            <img  src={logo} width="300" height="300" alt="Foto Alumno" className="img-circle"/>
+                            <img  src={alumnos.foto} width="300" height="300" alt="Foto Alumno" className="img-circle"/>
                         </div>
                         <div className="col-md-4">
                             <div>
