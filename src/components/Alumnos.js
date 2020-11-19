@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import {  Row, Col, Badge, Table, Form, Button, Card } from 'react-bootstrap';
+import {  Row, Col, Button, Card } from 'react-bootstrap';
 import axios from 'axios';
 import AddAlumnos from './btnAddAlumnos';
 // import '../css/almns.css';
@@ -34,7 +34,7 @@ class Alumnos extends Component{
     url: "https://app.fakejson.com/q",
     data: payload
     }).then(function(resp) {
-      console.log(resp.data);
+      // console.log(resp.data);
       self.setState({datos: resp.data})
     });
 
