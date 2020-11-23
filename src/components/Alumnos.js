@@ -16,44 +16,55 @@ class Alumnos extends Component{
   }
   
   componentDidMount(){    
-    let payload = {
-      token: "nBlkTNT48qxCqftPuRvYRw",
-      data: {
-        "_repeat": 5,
-        "apellidos": "nameLast",
-        "cve": "stringCharacters",
-        "foto": "personAvatar",
-        "school": "companyName",
-        "street": "addressStreetName",
-        "user_name": "nameFirst"
-      }
-    };
-    var self = this;
-    axios({
-    method: "post",
-    url: "https://app.fakejson.com/q",
-    data: payload
-    }).then(function(resp) {
-      // console.log(resp.data);
-      self.setState({datos: resp.data})
+    // let payload = {
+    //   token: "nBlkTNT48qxCqftPuRvYRw",
+    //   data: {
+    //     "_repeat": 5,
+    //     "apellidos": "nameLast",
+    //     "cve": "stringCharacters",
+    //     "foto": "personAvatar",
+    //     "school": "companyName",
+    //     "street": "addressStreetName",
+    //     "user_name": "nameFirst"
+    //   }
+    // };
+    // var self = this;
+    // axios({
+    // method: "post",
+    // url: "https://app.fakejson.com/q",
+    // data: payload
+    // }).then(function(resp) {
+    //   // console.log(resp.data);
+    //   self.setState({datos: resp.data})
+    // });
+    fetch("http://localhost:4000/api/alumnos",{
+      method: 'GET',
+      mode: 'cors',
+      credentials: 'same-origin',
+    })
+    .then(respuesta => respuesta.json())
+    .then(resp => {
+      // console.log(resp);
+      this.setState({datos: resp})
     });
 
   }
 
-  _handleSubmit(inNombre, inApellidos, inDireccion, inEscuela, inFoto){
+  _handleSubmit(inNombre, inApellidos, inDireccion, inCURP, inFoto){
     //console.log(nombre+apellidos+direccion+escuela+foto);
+    // var fs=require('fs');
     let datos = this.state.datos;
-    let apellidos = inApellidos;
+    let apellido = inApellidos;
     let foto = inFoto;
-    let school = inEscuela;
-    let street = inDireccion;
-    let user_name = inNombre;
-    const min = 10;
-    const max = 300;
-    const cve = Math.floor(Math.random() * (max - min + 1)) + min;
-    
+    let curp = inCURP;
+    let direccionDefault = inDireccion;
+    let nombre = inNombre+"";
+    let activo=1;
+    var target_path = './images/'+nombre.replace(" ", "_")+curp+'.jpg';
+    console.log(target_path);
+    // fs.copyFile(foto, target_path, (err)=>{});
     let data = {
-      apellidos, cve, foto, school, street, user_name
+      apellido, activo, target_path, curp, direccionDefault, nombre
     }
 
     datos.push(data);
@@ -86,13 +97,13 @@ class Alumnos extends Component{
             {
               this.state.datos.map((dato)=>(
                 <div className="media text-muted pt-3" key={dato.cve}>
-                <img className="rounded-circle" src={dato.foto} alt="foto" width="100px" height="100px"/>
+                <img className="rounded-circle" src={'/images/'+dato.foto} alt="foto" width="100px" height="100px"/>
                 <p className="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                <strong className="d-block text-gray-dark">{dato.user_name} {dato.apellidos}</strong>
+                <strong className="d-block text-gray-dark">{dato.nombre} {dato.apellido}</strong>
                 <Card>
                   <Card.Body>
-                    <p>Escuela: {dato.school} </p>
-                    <p>Dirección: {dato.street}</p>
+                    <p>Status: {dato.activo} </p>
+                    <p>Dirección: {dato.direccionDefault}</p>
                     <Button variant="primary" onClick={(e)=>{this.mostrarInfo(dato);}}>
                       Ver alumno <FaInfoCircle />
                     </Button>

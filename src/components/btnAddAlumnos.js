@@ -13,9 +13,9 @@ class AddAlumnos extends Component {
 			show: false,
 			formErrors: {
 				nombre: "",
-				apellidos: "",
-				direccion: "",
-				escuela: ""
+				apellido: "",
+				direccionDefault: "",
+				curp: ""
 			  },
 			file: null
 		};
@@ -43,18 +43,18 @@ class AddAlumnos extends Component {
 			? "No deben ser menos de 3 caracteres" : "";
 			break;
 	
-		  case 'apellidos':
-			formErrors.apellidos = value.length < 3
+		  case 'apellido':
+			formErrors.apellido = value.length < 3
 			? "No deben ser menos de 3 caracteres" : "";
 			break;
 
-		  case 'direccion':
-			formErrors.direccion = value.length < 5
+		  case 'direccionDefault':
+			formErrors.direccionDefault = value.length < 5
 			? "No deben ser menos de 5 caracteres" : "";
 			break;
 
-		  case 'escuela':
-			formErrors.escuela = value.length < 2
+		  case 'curp':
+			formErrors.curp = value.length < 2
 			? "No deben ser menos de 2 caracteres" : "";
 			break;
 		  case 'foto':
@@ -104,19 +104,19 @@ class AddAlumnos extends Component {
 								)}
 							</Form.Group>
 							
-							<Form.Group as={Col} controlId="formGridApellidos">
-								<Form.Label>Apellidos</Form.Label>
+							<Form.Group as={Col} controlId="formGridApellido">
+								<Form.Label>Apellido</Form.Label>
 								<Form.Control
-									className={formErrors.apellidos.length > 0 ? "is-invalid" : null}
+									className={formErrors.apellido.length > 0 ? "is-invalid" : null}
 									type="text"
-									name="apellidos"
-									placeholder="Apellidos del alumno"
+									name="apellido"
+									placeholder="Apellido del alumno"
 									onChange={this.handleChange}
-									ref={(input) => this._apellidos = input}
+									ref={(input) => this._apellido = input}
 								/>
-								{formErrors.apellidos.length > 0 && (
+								{formErrors.apellido.length > 0 && (
 								<Badge pill variant="danger">
-									{formErrors.apellidos}
+									{formErrors.apellido}
 								</Badge>
 								)}
 							</Form.Group>
@@ -125,33 +125,33 @@ class AddAlumnos extends Component {
 							<Form.Group as={Col} controlId="formGridStreet">
 								<Form.Label>Dirección</Form.Label>
 								<Form.Control
-									className={formErrors.direccion.length > 0 ? "is-invalid" : null}
+									className={formErrors.direccionDefault.length > 0 ? "is-invalid" : null}
 									type="text"
-									name="direccion"
+									name="direccionDefault"
 									placeholder="Dirección del alumno"
 									onChange={this.handleChange}
-									ref={(input) => this._direccion = input}
+									ref={(input) => this._direccionDefault = input}
 								/>
-								{formErrors.direccion.length > 0 && (
+								{formErrors.direccionDefault.length > 0 && (
 								<Badge pill variant="danger">
-									{formErrors.direccion}
+									{formErrors.direccionDefault}
 								</Badge>
 								)}
 							</Form.Group>
 
 							<Form.Group as={Col} controlId="formGridSchool">
-								<Form.Label>Escuela</Form.Label>
+								<Form.Label>CURP</Form.Label>
 								<Form.Control
-									className={formErrors.escuela.length > 0 ? "is-invalid" : null}
+									className={formErrors.curp.length > 0 ? "is-invalid" : null}
 									type="text"
-									name="escuela"
-									placeholder="Escuela del alumno"
+									name="curp"
+									placeholder="CURP del alumno"
 									onChange={this.handleChange}
-									ref={(input) => this._escuela = input}
+									ref={(input) => this._curp = input}
 								/>
-								{formErrors.escuela.length > 0 && (
+								{formErrors.curp.length > 0 && (
 								<Badge pill variant="danger">
-									{formErrors.escuela}
+									{formErrors.curp}
 								</Badge>
 								)}
 							</Form.Group>													        
@@ -194,7 +194,7 @@ class AddAlumnos extends Component {
 	_onSubmit = (e) => {
         e.preventDefault();
 		/*console.log(this._nombre.value); //it logs the input values.*/
-		this.props.handleSubmit(this._nombre.value, this._apellidos.value, this._direccion.value, this._escuela.value, this._foto.value);
+		this.props.handleSubmit(this._nombre.value, this._apellido.value, this._direccionDefault.value, this._curp.value, this.state.file);
 		this.myFormRef.reset();
 		this.setState({
 			file: null

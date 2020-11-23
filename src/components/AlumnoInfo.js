@@ -25,30 +25,30 @@ class AlumnoInfo extends Component{
                     </div>
                    <div className="row">
                         <div className="col-md-4">
-                            <img  src={alumnos.foto} width="300" height="300" alt="Foto Alumno" className="img-circle"/>
+                            <img  src={'/images/'+alumnos.foto} width="300" height="300" alt="Foto Alumno" className="img-circle"/>
                         </div>
                         <div className="col-md-4">
                             <div>
                                 <h6 className="text-secondary">Clave: </h6>
-                                <h5>{alumnos.cve}</h5>
+                                <h5>{alumnos.curp}</h5>
                             </div>
                             <div>
                                 <h6 className="text-secondary">Nombre:</h6>
-                                <h5>{alumnos.user_name}</h5>
+                                <h5>{alumnos.nombre}</h5>
                             </div>
                             <div>
                                 <h6 className="text-secondary">Apellido:</h6>
-                                <h5>{alumnos.apellidos}</h5>
+                                <h5>{alumnos.apellido}</h5>
                             </div>
                         </div>{/*Fin 1 Col*/}
                         <div className="col-md-4">
                             <div>
-                                <h6 className="text-secondary">Escuela:</h6>
-                                <h5>{alumnos.school}</h5>
+                                <h6 className="text-secondary">Status:</h6>
+                                <h5>{alumnos.activo}</h5>
                             </div>
                             <div>
                                 <h6 className="text-secondary">Calle:</h6>
-                                <h5>{alumnos.street}</h5>
+                                <h5>{alumnos.direccionDefault}</h5>
                             </div>
                         </div>{/*Fin 2 Col*/}
                     </div>
