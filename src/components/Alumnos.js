@@ -50,30 +50,58 @@ class Alumnos extends Component{
 
   }
 
-  _handleSubmit(inNombre, inApellidos, inDireccion, inCURP, inFoto){
-    //console.log(nombre+apellidos+direccion+escuela+foto);
-    // var fs=require('fs');
-    let datos = this.state.datos;
+  _handleSubmit(inNombre, inApellidos, inDireccion, inCURP, inFileSend){
     let apellido = inApellidos;
-    let foto = inFoto;
+    let file = inFileSend;
     let curp = inCURP;
     let direccionDefault = inDireccion;
     let nombre = inNombre+"";
     let activo=1;
-    var target_path = './images/'+nombre.replace(" ", "_")+curp+'.jpg';
-    console.log(target_path);
-    // fs.copyFile(foto, target_path, (err)=>{});
-    let data = {
-      apellido, activo, target_path, curp, direccionDefault, nombre
-    }
+    var foto = "";
 
-    datos.push(data);
-    this.setState({
-      datos: datos
+    let data = {
+      apellido, activo, foto, curp, direccionDefault, nombre
+    }
+    this.sendFoto(file, data);
+  }
+
+  sendAlumno=(alumno)=>{
+    console.log(alumno);
+    fetch("http://localhost:4000/api/alumnos",{
+      method: 'POST',
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(alumno)
+    })
+    .then(respuesta => respuesta.json())
+    .catch(error => console.error('Error:', error))
+    .then(resp => {
+      console.log(resp);
+      let datos = this.state.datos;
+      datos.push(alumno);
+      this.setState({
+        datos: datos
+      });
+    });
+  }
+  sendFoto=(foto, alumno)=>{
+    var data=new FormData();
+    data.append('file', foto);
+    fetch("http://localhost:4000/images/foto/alumno",{
+      method: 'POST',
+      body: data
+    })
+    .then(respuesta => respuesta.json())
+    .catch(error => console.error('Error:', error))
+    .then(resp => {
+      // console.log(resp);
+      alumno.foto=resp.filename;
+      this.sendAlumno(alumno);
     });
   }
   mostrarInfo=(data)=>{
-    console.log(data);
+    // console.log(data);
     this.props.history.push({
       pathname: '/alumnos/info',
       search: '?id='+data.cve,
@@ -97,7 +125,7 @@ class Alumnos extends Component{
             {
               this.state.datos.map((dato)=>(
                 <div className="media text-muted pt-3" key={dato.cve}>
-                <img className="rounded-circle" src={'/images/'+dato.foto} alt="foto" width="100px" height="100px"/>
+                <img className="rounded-circle" src={'http://localhost:4000/images/foto/alumno/'+dato.foto} alt="foto" width="100px" height="100px"/>
                 <p className="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                 <strong className="d-block text-gray-dark">{dato.nombre} {dato.apellido}</strong>
                 <Card>

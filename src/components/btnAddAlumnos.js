@@ -17,7 +17,8 @@ class AddAlumnos extends Component {
 				direccionDefault: "",
 				curp: ""
 			  },
-			file: null
+			file: null,
+			fileSend: null
 		};
 		
 	}
@@ -34,7 +35,7 @@ class AddAlumnos extends Component {
 		e.preventDefault();
 		
 		const { name, value } = e.target;
-		console.log(name);
+		// console.log(name);
 		let formErrors = this.state.formErrors;
 	
 		switch (name) {
@@ -59,6 +60,7 @@ class AddAlumnos extends Component {
 			break;
 		  case 'foto':
 			this.setState({
+				fileSend: e.target.files[0],
 				file: URL.createObjectURL(e.target.files[0])
 			  })
 			break;
@@ -66,7 +68,7 @@ class AddAlumnos extends Component {
 			break;
 		}
 	
-		this.setState({ formErrors, [name]: value}, () => console.log(this.state));
+		this.setState({ formErrors, [name]: value});
 	  };
 
 	render() {
@@ -194,10 +196,12 @@ class AddAlumnos extends Component {
 	_onSubmit = (e) => {
         e.preventDefault();
 		/*console.log(this._nombre.value); //it logs the input values.*/
-		this.props.handleSubmit(this._nombre.value, this._apellido.value, this._direccionDefault.value, this._curp.value, this.state.file);
+		this.props.handleSubmit(this._nombre.value, this._apellido.value, this._direccionDefault.value, this._curp.value, this.state.fileSend);
 		this.myFormRef.reset();
+		this.handleClose();
 		this.setState({
-			file: null
+			file: null,
+			fileSend: null
 		})
     }
 }

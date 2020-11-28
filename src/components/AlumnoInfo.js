@@ -25,7 +25,7 @@ class AlumnoInfo extends Component{
                     </div>
                    <div className="row">
                         <div className="col-md-4">
-                            <img  src={'/images/'+alumnos.foto} width="300" height="300" alt="Foto Alumno" className="img-circle"/>
+                            <img  src={'http://localhost:4000/images/foto/alumno/'+alumnos.foto} width="300" height="300" alt="Foto Alumno" className="img-circle"/>
                         </div>
                         <div className="col-md-4">
                             <div>
