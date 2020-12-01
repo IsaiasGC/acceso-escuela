@@ -10,6 +10,7 @@
     "bootstrap": "^4.5.0",
     "canvas": "^2.6.1",
     "face-api.js": "^0.22.2",
+    "md5": "^2.3.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {  Row, Col, Button, Card } from 'react-bootstrap';
-import axios from 'axios';
+// import axios from 'axios';
 import AddAlumnos from './btnAddAlumnos';
 // import '../css/almns.css';
 import { FaInfoCircle } from 'react-icons/fa';

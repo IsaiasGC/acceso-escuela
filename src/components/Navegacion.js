@@ -29,7 +29,7 @@ class Navegacion extends Component {
                         </NavDropdown.Item> */}
                         <NavDropdown.Divider />
                         <NavDropdown.Item onClick={this.handleLogout} style={{color: 'red'}}>
-                        Cerrar Sesion <i className="fas fa-sign-out-alt 2x"></i>
+                            Cerrar Sesion <i className="fas fa-sign-out-alt 2x"></i>
                         </NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
