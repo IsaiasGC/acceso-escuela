@@ -10,6 +10,7 @@ import NotFound from './components/NotFound';
 import AlumnoInfo from './components/AlumnoInfo';
 import Reconocedor from './components/Reconocedor';
 import RestorePassword from './components/RestorePassword';
+import Listas from './components/Listas';
 
 class App extends Component {
 	constructor(props) {
@@ -42,7 +43,7 @@ class App extends Component {
 					<Route path='/login' exact render={()=><Login login={this.login}/>}/>
 					<Route path='/alumnos' exact render={()=><Alumnos/>}/>
 					<Route path='/alumnos/info' exact render={()=><AlumnoInfo/>}/>
-					<Route path='/registro' exact render={()=><Reconocedor/>}/>
+					<Route path='/listas' exact render={()=><Listas/>}/>
 					<Route path='/restore/password' exact render={()=><RestorePassword/>}/>
 					<Route path="*" component={NotFound}/>
 				</Switch>
