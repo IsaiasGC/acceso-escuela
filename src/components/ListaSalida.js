@@ -1,28 +1,47 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {  Row, Col, Button, Card, Form } from 'react-bootstrap';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal);
 
 class ListaSalida extends Component{
     constructor(props) {
         super(props);
         this.state = {
             datos: [],
-            filtrados: []     
+            filtrados: [],
+            hoy: {}
         }
-        this._handleSubmit = this._handleSubmit.bind(this);
-      }
-      filtro=React.createRef();
+    }
+    filtro=React.createRef();
       
-    componentDidMount(){    
-        fetch("http://localhost:4000/api/alumnos",{
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'same-origin',
+    componentDidMount(){
+        this.getHoy().then(respuesta => this.getPorsalir());
+    }
+    getHoy=async ()=>{
+        await fetch("http://localhost:4000/api/fechas/hoy",{
+            method: 'GET',
+            mode: 'cors',
+            credentials: 'same-origin',
+        })
+        .then(respuesta => respuesta.json())
+        .then(fecha => {
+            // console.log(resp);
+            this.setState({hoy: fecha});
+        });
+    }
+    getPorsalir=()=>{
+        fetch("http://localhost:4000/api/alumnos/porsalir/"+this.state.hoy.id,{
+            method: 'GET',
+            mode: 'cors',
+            credentials: 'same-origin',
         })
         .then(respuesta => respuesta.json())
         .then(resp => {
-        // console.log(resp);
-        this.setState({datos: resp, filtrados: resp})
+            // console.log(resp);
+            this.setState({datos: resp, filtrados: resp})
         });
     }
     handleChange=()=>{
@@ -36,14 +55,50 @@ class ListaSalida extends Component{
             this.setState({filtrados: flt});
         }
     }
-    _handleSubmit(inNombre, inApellidos, inDireccion, inCURP, inFileSend){
-    }
-    mostrarInfo=(data)=>{
-        // console.log(data);
-        this.props.history.push({
-        pathname: '/alumnos/info',
-        search: '?id='+data.cve,
-        state: { alumno: data }
+    marcarSalida=(data)=>{
+        var body={
+            id_fecha: this.state.hoy.id,
+            id_alumno: data.id,
+            id_registrador: 1,
+            comentario: ""
+        }
+        // console.log(body);
+        fetch("http://localhost:4000/api/listas/salida",{
+            method: 'post',
+            mode: 'cors',
+            credentials: 'same-origin',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+        .then(respuesta => respuesta.json())
+        .catch(err =>{
+            MySwal.fire({
+                icon: 'error',
+                title: 'Error de Conexion...',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        })
+        .then(resp => {
+            console.log(resp);
+            if(resp.status==="error"){
+                MySwal.fire({
+                    icon: 'error',
+                    title: resp.msj,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }else{
+                MySwal.fire({
+                    icon: 'success',
+                    title: 'Salida marcada',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                this.getAusentes();
+            }
         });
     }
     render(){
@@ -84,7 +139,7 @@ class ListaSalida extends Component{
                                                         <p>Dirección: {dato.direccionDefault}</p>
                                                     </Col>
                                                     <Col md={4}>
-                                                        <Button variant="danger" onClick={(e)=>{this.mostrarInfo(dato);}}>
+                                                        <Button variant="danger" onClick={(e)=>{this.marcarSalida(dato);}}>
                                                             Salida <i class="fas fa-check"></i>
                                                         </Button>
                                                     </Col>
