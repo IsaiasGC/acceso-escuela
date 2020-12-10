@@ -11,6 +11,7 @@ import AlumnoInfo from './components/AlumnoInfo';
 import Reconocedor from './components/Reconocedor';
 import RestorePassword from './components/RestorePassword';
 import Listas from './components/Listas';
+import Tutor from './components/tutor/Tutor';
 
 class App extends Component {
 	constructor(props) {
@@ -45,6 +46,7 @@ class App extends Component {
 					<Route path='/alumnos/info' exact render={()=><AlumnoInfo/>}/>
 					<Route path='/listas' exact render={()=><Listas/>}/>
 					<Route path='/restore/password' exact render={()=><RestorePassword/>}/>
+					<Route path='/tutores' exact render={Tutor} />
 					<Route path="*" component={NotFound}/>
 				</Switch>
 			</BrowserRouter>
