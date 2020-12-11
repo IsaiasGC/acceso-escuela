@@ -22,6 +22,7 @@ class Navegacion extends Component {
             <Navbar.Collapse id="navbar-principal" className="justify-content-end">
                 <Nav>
                     <Nav.Link eventKey="alumnos" onSelect={this.navigate}><i className="fas fa-users"></i> Alumnos</Nav.Link>
+                    <Nav.Link eventKey="tutores" onSelect={this.navigate}><i class="fas fa-user-plus"></i> Tutores</Nav.Link>
                     <Nav.Link eventKey="listas" onSelect={this.navigate}><i className="far fa-list-alt"></i> Listas</Nav.Link>
                     <NavDropdown title={title} alignRight="false">
                         {/* <NavDropdown.Item onClick={this.crud}>
